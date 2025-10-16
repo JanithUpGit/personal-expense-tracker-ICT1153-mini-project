@@ -1,0 +1,125 @@
+
+
+.motivation {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  padding: 40px 20px;
+  background: var(--page-bg);
+  align-items: start;
+}
+
+/* common box */
+.motivation .box {
+  padding: 28px;
+  border-radius: 18px;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+/* LEFT column boxes (give them a soft header-style background) */
+.motivation .box1 {
+  background: linear-gradient(
+    135deg,
+    rgba(205, 220, 57, 0.12),
+    rgba(232, 245, 233, 0.6)
+  );
+  box-shadow: 0 10px 15px var(--card-shadow);
+  text-align: left;
+  color: #0b2b10; /* darkish to contrast */
+}
+
+.motivation .box2 {
+  background: transparent;
+  box-shadow: none;
+  text-align: right;
+  color: #334155;
+}
+
+.motivation h3 {
+  font-size: 1.5rem;
+  color: var(--green);
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
+.motivation p {
+  color: #334155;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.motivation .video-container {
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+  background: #fff;
+}
+.motivation .video-container video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.motivation .box1:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px var(--card-shadow-hover);
+}
+
+@media (max-width: 900px) {
+  .motivation {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 24px 16px;
+  }
+  .motivation .mbox2:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .motivation .mbox1:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px var(--card-shadow-hover);
+  }
+
+  .motivation .mbox1 {
+    background: linear-gradient(
+      135deg,
+      rgba(205, 220, 57, 0.12),
+      rgba(232, 245, 233, 0.6)
+    );
+    box-shadow: 0 10px 15px var(--card-shadow);
+    text-align: left;
+    color: #0b2b10;
+  }
+  
+  .motivation .mbox2 {
+    background: none;
+    box-shadow: none;
+    width: 100%;
+    text-align: center;
+  }
+  .motivation .box {
+    width: 100%;
+    text-align: center;
+    padding: 22px;
+  }
+
+  .motivation h3 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+  .motivation p {
+    text-align: center;
+    font-size: 0.98rem;
+  }
+
+  .motivation .video-container {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .motivation .video-container video {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+  }
+}

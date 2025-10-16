@@ -1,0 +1,62 @@
+/* Intro Section */
+.intro {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.intro button {
+  padding: 12px 30px;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #cddc39;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.intro button:hover {
+  background-color: #558b2f;
+  transform: scale(1.05);
+}
+
+
+.tagline {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 50px 0;
+}
+
+.tagline span {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+
+.tagline .simple_step {
+    color: #EE851F; 
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.tagline .to {
+    color: #000000; 
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.tagline .financial {
+    color: #558b2f; 
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.tagline .freedom {
+    color: #cddc39; 
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.tagline span:hover {
+    transform: scale(1.1);
+}

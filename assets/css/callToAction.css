@@ -1,0 +1,59 @@
+/* Call-to-Action Section */
+.call-to-action {
+  text-align: center;
+  color: var(--light-green);
+  padding: 80px 20px;
+  margin-top: 60px;
+}
+
+.call-to-action h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 15px;
+}
+
+.call-to-action p {
+  font-size: 1.1rem;
+  color: var(--orange);
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.call-to-action button {
+  background-color: var(--yellow);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 35px;
+  cursor: pointer;
+  box-shadow: 0 5px 10px var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.call-to-action button:hover {
+  background-color: var(--orange);
+  color: #ffffff;
+  box-shadow: 0 8px 20px var(--card-shadow-hover);
+  transform: scale(1.05);
+}
+
+/* Mobile friendly */
+@media (max-width: 768px) {
+  .call-to-action {
+    padding: 60px 20px;
+  }
+
+  .call-to-action h2 {
+    font-size: 1.6rem;
+  }
+
+  .call-to-action p {
+    font-size: 1rem;
+  }
+}

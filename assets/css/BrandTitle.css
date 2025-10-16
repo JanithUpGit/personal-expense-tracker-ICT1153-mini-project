@@ -1,0 +1,28 @@
+.brand-title {
+  text-align: center;
+  margin: 0 0;
+}
+
+.brand-title img {
+  width: 550px;       /* default desktop width */
+  height: 100px;      /* fixed height */
+  object-fit: cover;  /* crops the image to fill the box */
+  object-position: center; /* centers the visible area */
+  max-width: 90%;     /* prevents overflow on smaller screens */
+}
+
+/* Tablet screens */
+@media (max-width: 992px) {
+  .brand-title img {
+    width: 400px;
+    height: 80px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+  .brand-title img {
+    width: 300px;
+    height: 60px;
+  }
+}

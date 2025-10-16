@@ -1,0 +1,21 @@
+/* Header Section */
+header {
+
+  padding: 20px;
+  text-align: center;
+}
+
+header .logo img {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  color: #558b2f; /* dark green */
+  margin-bottom: 5px;
+}
+
+header p {
+  color: #827717; /* olive yellow */
+  font-weight: 500;
+}
