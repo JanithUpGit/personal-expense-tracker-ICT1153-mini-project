@@ -1,0 +1,80 @@
+.add-expense-section {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  background-color: var(--page-bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+.add-expense-section h2 {
+  text-align: center;
+  color: var(--orange);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--orange);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--yellow);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+  color: var(--gray); /* or any color you like */
+  opacity: 1; /* ensures full visibility */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--orange);
+  outline: none;
+  box-shadow: 0 4px 12px var(--card-shadow-hover);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--yellow);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--orange);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.success-message {
+  color: var(--light-green);
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 600;
+}

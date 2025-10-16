@@ -1,0 +1,152 @@
+.category-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  background-color: var(--page-bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+h2{
+  margin-top: 30px;
+  text-align: center;
+  color: var(--green);
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+.categories-table h3{
+  margin-top: 30px;
+  text-align: center;
+  color: var(--orange);
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+.categories-table {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px 20px;
+
+}
+.category-section h2, .category-section h3 {
+  text-align: center;
+  color: var(--orange);
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+
+.add-category-form {
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: var(--orange);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--yellow);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--gray);
+  opacity: 1;
+}
+
+.form-group input:focus {
+  border-color: var(--orange);
+  outline: none;
+  box-shadow: 0 4px 12px var(--card-shadow-hover);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--yellow);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--orange);
+  transform: scale(1.01);
+}
+
+/* ---- Table Styling ---- */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+thead {
+  background-color: var(--green);
+  color: #fff;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px 15px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+tbody tr:hover {
+  background-color: var(--card-hover-bg, #f8f8f8);
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+/* ---- Alternate Row Colors ---- */
+tbody tr:nth-child(odd) {
+  background-color: var(light-green); /* lighter */
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(59, 180, 50, 0.05);
+}
+
+tbody tr:hover {
+  background-color: rgba(36, 129, 11, 0.312);
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--orange);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: var(--red, #e63946);
+  transform: scale(1.1);
+}

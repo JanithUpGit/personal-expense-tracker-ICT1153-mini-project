@@ -1,5 +1,5 @@
 
-export const data = {
+const expensesDb = {
   categories: [
     { id: 1, name: "Food", icon: "🍔" },
     { id: 2, name: "Transport", icon: "🚌" },
@@ -82,3 +82,42 @@ export const data = {
     }
   ]
 };
+
+function getData() {
+  return JSON.parse(localStorage.getItem("expensesDb")) || [];
+}
+
+function setData(expenses) {
+  localStorage.setItem("expensesDb", JSON.stringify(expenses));
+}
+
+// Delete an expense by id
+function deleteData(id) {
+  let expenses = getData();
+  expenses = expenses.filter(exp => exp.id !== id);
+  setData(expenses);
+}
+
+// Update an expense by id
+function updateData(id, updatedExpense) {
+  let expenses = getData();
+  expenses = expenses.map(exp => exp.id === id ? { ...exp, ...updatedExpense } : exp);
+  setData(expenses);
+}
+
+// Add a new expense with unique id
+function addExpense(expense) {
+  let expenses = getData();
+  // Assign a unique id (timestamp works well)
+  expense.id = Date.now();
+  expenses.push(expense);
+  setData(expenses);
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  setData(expensesDb);
+  console.log("expensesDb loaded!");
+});
