@@ -48,7 +48,10 @@
   line-height: 1.6;
   font-size: 1rem;
 }
+.motivation img {
+ width: 100px;
 
+}
 .motivation .video-container {
   overflow: hidden;
   border-radius: 14px;

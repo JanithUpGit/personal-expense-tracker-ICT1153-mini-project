@@ -43,6 +43,13 @@
   transform: scale(1.05);
 }
 
+.call-to-action img {
+  width: 80%;
+  height: 350px; /* set a fixed height */
+  object-fit: cover; /* crops the image to fill area */
+  border-radius: 10px; /* optional: for rounded corners */
+}
+
 /* Mobile friendly */
 @media (max-width: 768px) {
   .call-to-action {
