@@ -1,4 +1,12 @@
 const expensesDb = {
+    users: [
+    {
+      id: 1,
+      username: "janith",
+      email: "janith@example.com",
+      password: "123456",
+    },
+  ],
   categories: [
     {
       id: 1,
@@ -252,38 +260,11 @@ const expensesDb = {
   ],
 };
 
-function getData() {
-  return JSON.parse(localStorage.getItem("expensesDb")) || [];
-}
 
 function setData(expenses) {
   localStorage.setItem("expensesDb", JSON.stringify(expenses));
 }
 
-// Delete an expense by id
-function deleteData(id) {
-  let expenses = getData();
-  expenses = expenses.filter((exp) => exp.id !== id);
-  setData(expenses);
-}
-
-// Update an expense by id
-function updateData(id, updatedExpense) {
-  let expenses = getData();
-  expenses = expenses.map((exp) =>
-    exp.id === id ? { ...exp, ...updatedExpense } : exp
-  );
-  setData(expenses);
-}
-
-// Add a new expense with unique id
-function addExpense(expense) {
-  let expenses = getData();
-  // Assign a unique id (timestamp works well)
-  expense.id = Date.now();
-  expenses.push(expense);
-  setData(expenses);
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   setData(expensesDb);
