@@ -47,6 +47,7 @@ function renderCategories() {
       <td>${cat.id}</td>
       <td>${cat.icon}</td>
       <td>${cat.name}</td>
+      <td>${cat.description}</td>
       <td><button class="delete-btn" data-index="${index}">❌</button></td>
     `;
     tbody.appendChild(row);
@@ -83,23 +84,8 @@ document.getElementById("category-form").addEventListener("submit", e => {
   renderCategories();
 
 });
-.delete-btn {
-  background: none;
-  border: none;
-  color: var(--orange);
-  font-size: 0.9rem; /* smaller X sign */
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 4px 6px; /* less padding */
-  border-radius: 6px;
-  line-height: 1;
-}
 
-.delete-btn:hover {
-  background-color: rgba(255, 165, 0, 0.1); /* subtle hover bg */
-  color: var(--red, #e63946);
-  transform: scale(1.1);
-}
+
 
 document.addEventListener("DOMContentLoaded", renderCategories);
 

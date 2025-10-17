@@ -27,6 +27,8 @@ function updateData(index, updatedExpense) {
   setData(db);
 }
 
+
+
 // ----- App Logic -----
 let expensesDb = getData();
 
@@ -101,6 +103,13 @@ function handleFormSubmit(event) {
   form.reset();
 }
 
+
+
+
+
+
+
+
 // ----- Initialize -----
 document.addEventListener("DOMContentLoaded", () => {
   expensesDb = getData();
@@ -109,3 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("expense-form");
   if (form) form.addEventListener("submit", handleFormSubmit);
 });
+
+
+

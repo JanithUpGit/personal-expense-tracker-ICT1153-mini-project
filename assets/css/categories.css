@@ -150,3 +150,21 @@ tbody tr:hover {
   color: var(--red, #e63946);
   transform: scale(1.1);
 }
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--orange);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 6px; /* less padding */
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  background-color: rgba(255, 165, 0, 0.1); /* subtle hover bg */
+  color: var(--red, #e63946);
+  transform: scale(1.1);
+}

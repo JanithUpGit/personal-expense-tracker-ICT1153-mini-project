@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Dashboard | Personal Expense Tracker</title>
+  <link rel="stylesheet" href="/assets/css/common.css" />
+  <link rel="stylesheet" href="/assets/css/expenses.css" />
+</head>
+<body>
+  <section class="expense-dashboard">
+    <h2>Expense Overview</h2>
+
+    <!-- 🔍 Search -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by category or description...">
+    </div>
+
+    <!-- 📊 Summary -->
+    <div class="summary-container">
+      <div class="summary-card"><h3>Today</h3><p id="todayExpense">Rs. 0</p></div>
+      <div class="summary-card"><h3>This Week</h3><p id="weekExpense">Rs. 0</p></div>
+      <div class="summary-card"><h3>This Month</h3><p id="monthExpense">Rs. 0</p></div>
+      <div class="summary-card total"><h3>Total</h3><p id="totalExpense">Rs. 0</p></div>
+    </div>
+
+    <!-- 🧾 Table -->
+    <div class="table-container">
+      <table id="expenseTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Amount (Rs.)</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="expenseBody">
+          <tr><td colspan="5" style="text-align:center;">No data found</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 📈 Charts -->
+    <div class="charts-container">
+      <div class="chart-box">
+        <h3>Monthly Expense Overview</h3>
+        <canvas id="monthChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>Category-wise Expense</h3>
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/assets/js/expensesData.js"></script>
+</body>
+</html>
