@@ -1,4 +1,5 @@
-.expense-dashboard {
+.expense-history{
+
   max-width: 1100px;
   margin: 60px auto;
   padding: 40px 20px;
@@ -6,17 +7,12 @@
 
 }
 
-h2 {
-  text-align: center;
-  color: var(--orange);
-  margin-bottom: 30px;
-  font-weight: 300;
-}
 
 /* 🔍 Search Bar */
 .search-bar {
   text-align: center;
   margin-bottom: 30px;
+  margin-top: 40px;
 }
 
 .search-bar input {
@@ -32,33 +28,6 @@ h2 {
   border-color: var(--orange);
 }
 
-/* 📊 Summary Cards */
-.summary-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  margin-bottom: 40px;
-}
-.summary-card {
-  background-color: var(--card-bg, #fff);
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 5px 15px var(--card-shadow);
-}
-.summary-card h3 {
-  color: var(--orange);
-  font-weight: 400;
-}
-.summary-card p {
-  font-size: 1.3rem;
-  color: var(--green);
-  font-weight: 600;
-}
-.summary-card.total {
-  background-color: var(--yellow);
-  color: #fff;
-}
 
 /* 🧾 Table */
 .table-container {
@@ -88,22 +57,5 @@ tbody tr:hover {
   transition: all 0.3s ease;
 }
 
-/* 📈 Charts */
-.charts-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 40px;
-  margin-top: 50px;
-}
-.chart-box {
-  background-color: var(--page-bg);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 5px 15px var(--card-shadow);
-}
-.chart-box h3 {
-  text-align: center;
-  color: var(--orange);
-  margin-bottom: 15px;
-  font-weight: 400;
-}
+
+

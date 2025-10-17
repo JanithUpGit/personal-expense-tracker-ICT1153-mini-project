@@ -1,15 +1,27 @@
 /* Navigation Bar */
+nav {
+  position: fixed; /* Fixes the navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* or your preferred background */
+  z-index: 1000; /* Ensures it stays above other content */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* optional shadow */
+  padding: 10px 0; /* spacing */
+}
+
 nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin-top: 10px;
+  margin: 0; /* remove margin to align properly */
+  padding: 0;
 }
 
 nav ul li a {
   text-decoration: none;
-  color: #558b2f;; 
+  color: #558b2f;
   font-weight: 600;
   padding: 8px 18px;
   border-radius: 5px;
@@ -19,4 +31,9 @@ nav ul li a {
 nav ul li a:hover,
 nav ul li a.active { 
   color: #e9cf0a;
+}
+
+/* Add padding to body so content is not hidden behind navbar */
+body {
+  padding-top: 60px; /* adjust according to navbar height */
 }

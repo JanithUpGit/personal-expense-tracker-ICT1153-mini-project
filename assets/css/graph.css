@@ -1,0 +1,112 @@
+
+/* 📈 Charts */
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+
+.chart-box h3 {
+  text-align: center;
+  color: var(--orange);
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 250px;
+  padding: 40px 20px;
+  border-radius: 15px;
+  background: var(--page-bg);
+  box-shadow: 0 4px 10px var(--card-shadow);
+  overflow-x: auto;
+}
+
+
+/* Each bar with flexible width */
+.bar {
+  flex: 0 0 40px; /* fixed width, does not shrink */
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+
+.bar:hover {
+  transform: scale(1.05);
+}
+
+/* Bar labels rotated slightly to avoid overlap */
+.bar-label {
+  position: absolute;
+  bottom: -25px;
+  width: 50px; /* enough space for text */
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-color);
+  transform: rotate(-30deg);
+  transform-origin: top center;
+}
+
+
+/* Value on top of bar */
+.bar-value {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--orange);
+  font-weight: bold;
+}
+
+
+.graph-section {
+  max-width: 800px;
+  margin: 60px auto;
+  background: var(--page-bg);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 20px var(--card-shadow);
+}
+
+.line-graph {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  background: linear-gradient(to top, #fdfdfd, #fafafa);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--yellow);
+}
+
+.line-point {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.line-path {
+  position: absolute;
+  height: 2px;
+  background: var(--green);
+  transform-origin: left center;
+  z-index: 1;
+}
+
+.graph-label {
+  position: absolute;
+  bottom: -20px;
+  font-size: 0.8rem;
+  color: var(--gray);
+  transform: translateX(-50%);
+}

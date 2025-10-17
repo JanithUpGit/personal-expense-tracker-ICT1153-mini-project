@@ -1,14 +1,16 @@
 // ----- Database Helper Functions -----
 function getData() {
-  return JSON.parse(localStorage.getItem("expensesDb")) || {
-    categories: [
-      { id: 1, name: "Food", icon: "🍔" },
-      { id: 2, name: "Transport", icon: "🚗" },
-      { id: 3, name: "Shopping", icon: "🛍️" },
-      { id: 4, name: "Entertainment", icon: "🎮" },
-    ],
-    expenses: []
-  };
+  return (
+    JSON.parse(localStorage.getItem("expensesDb")) || {
+      categories: [
+        { id: 1, name: "Food", icon: "🍔" },
+        { id: 2, name: "Transport", icon: "🚗" },
+        { id: 3, name: "Shopping", icon: "🛍️" },
+        { id: 4, name: "Entertainment", icon: "🎮" },
+      ],
+      expenses: [],
+    }
+  );
 }
 
 function setData(data) {
@@ -31,9 +33,15 @@ function updateData(index, updatedExpense) {
 function searchExpenses(keyword) {
   const db = getData();
   const lower = keyword.toLowerCase();
-  return db.expenses.filter(exp => 
-    exp.description.toLowerCase().includes(lower) ||
-    db.categories.find(c => c.id === exp.category)?.name.toLowerCase().includes(lower)
+  return db.expenses.filter(
+    (exp) =>
+      exp.description.toLowerCase().includes(lower) ||
+      db.categories
+        .find((c) => c.id === exp.category)
+        ?.name.toLowerCase()
+        .includes(lower)
+        
+      
   );
 }
 
@@ -50,7 +58,7 @@ function renderExpensesTable(expenses) {
   }
 
   expenses.forEach((exp, i) => {
-    const category = db.categories.find(c => c.id === exp.category);
+    const category = db.categories.find((c) => c.id === exp.category);
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${i + 1}</td>
@@ -63,7 +71,6 @@ function renderExpensesTable(expenses) {
   });
 }
 
-// ----- Calculations -----
 function calculateTotalExpenses() {
   const db = getData();
   return db.expenses.reduce((sum, exp) => sum + Number(exp.amount), 0);
@@ -73,7 +80,7 @@ function calculateTodayExpenses() {
   const db = getData();
   const today = new Date().toISOString().split("T")[0];
   return db.expenses
-    .filter(exp => exp.date === today)
+    .filter((exp) => exp.date === today)
     .reduce((sum, exp) => sum + Number(exp.amount), 0);
 }
 
@@ -86,7 +93,7 @@ function calculateWeekExpenses() {
   endOfWeek.setDate(startOfWeek.getDate() + 6);
 
   return db.expenses
-    .filter(exp => {
+    .filter((exp) => {
       const date = new Date(exp.date);
       return date >= startOfWeek && date <= endOfWeek;
     })
@@ -99,9 +106,11 @@ function calculateMonthExpenses() {
   const currentYear = new Date().getFullYear();
 
   return db.expenses
-    .filter(exp => {
+    .filter((exp) => {
       const date = new Date(exp.date);
-      return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+      return (
+        date.getMonth() === currentMonth && date.getFullYear() === currentYear
+      );
     })
     .reduce((sum, exp) => sum + Number(exp.amount), 0);
 }
@@ -111,18 +120,17 @@ function getTotalExpenseByCategory() {
   const db = getData();
   const totals = {};
 
-  db.expenses.forEach(exp => {
-    const cat = db.categories.find(c => c.id === exp.category);
+  db.expenses.forEach((exp) => {
+    const cat = db.categories.find((c) => c.id === exp.category);
     const catName = cat ? cat.name : "Unknown";
     totals[catName] = (totals[catName] || 0) + Number(exp.amount);
   });
 
   return {
     labels: Object.keys(totals),
-    data: Object.values(totals)
+    data: Object.values(totals),
   };
 }
-
 function getMonthlyExpenseData() {
   const db = getData();
   const currentMonth = new Date().getMonth();
@@ -130,33 +138,93 @@ function getMonthlyExpenseData() {
 
   const dailyTotals = {};
 
-  db.expenses.forEach(exp => {
+  db.expenses.forEach((exp) => {
     const date = new Date(exp.date);
-    if (date.getMonth() === currentMonth && date.getFullYear() === currentYear) {
-      const day = exp.date;
+    if (
+      date.getMonth() === currentMonth &&
+      date.getFullYear() === currentYear
+    ) {
+      const day = date.getDate();
       dailyTotals[day] = (dailyTotals[day] || 0) + Number(exp.amount);
     }
   });
 
+  const sortedDays = Object.keys(dailyTotals).sort((a, b) => a - b);
+
   return {
-    labels: Object.keys(dailyTotals),
-    data: Object.values(dailyTotals)
+    labels: sortedDays,
+    data: sortedDays.map((day) => dailyTotals[day]),
   };
 }
 
-// ----- On Load -----
+// ----- Chart Rendering Functions -----
+
+function renderBarChart(containerId, labels, data, colors) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  if (labels.length === 0) {
+    container.innerHTML =
+      "<p style='text-align:center; width:100%;'>No data</p>";
+    return;
+  }
+
+  const maxValue = Math.max(...data);
+  data.forEach((value, index) => {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.height = `${(value / maxValue) * 100}%`;
+
+    if (Array.isArray(colors) && colors.length >= 2) {
+      bar.style.background = index % 2 === 0 ? colors[0] : colors[1];
+    } else {
+      bar.style.background = colors;
+    }
+
+    const valueLabel = document.createElement("div");
+    valueLabel.className = "bar-value";
+    valueLabel.textContent = "Rs." + value;
+
+    const label = document.createElement("div");
+    label.className = "bar-label";
+    label.textContent = labels[index];
+
+    bar.appendChild(valueLabel);
+    bar.appendChild(label);
+    container.appendChild(bar);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const db = getData();
   renderExpensesTable(db.expenses);
 
-  document.querySelector("#totalExpense").textContent = "Rs." + calculateTotalExpenses();
-  document.querySelector("#todayExpense").textContent = "Rs." + calculateTodayExpenses();
-  document.querySelector("#weekExpense").textContent = "Rs." + calculateWeekExpenses();
-  document.querySelector("#monthExpense").textContent = "Rs." + calculateMonthExpenses();
+  document.querySelector("#totalExpense").textContent =
+    "Rs." + calculateTotalExpenses();
+  document.querySelector("#todayExpense").textContent =
+    "Rs." + calculateTodayExpenses();
+  document.querySelector("#weekExpense").textContent =
+    "Rs." + calculateWeekExpenses();
+  document.querySelector("#monthExpense").textContent =
+    "Rs." + calculateMonthExpenses();
+
+  const monthData = getMonthlyExpenseData();
+  renderBarChart("monthChart", monthData.labels, monthData.data, [
+    "linear-gradient(to top, var(--green), var(--light-green))",
+    "linear-gradient(to top, var(--yellow), var(--orange))",
+  ]);
+
+  const catData = getTotalExpenseByCategory();
+  renderBarChart(
+    "categoryChart",
+    catData.labels,
+    catData.data,
+    "linear-gradient(to top, var(--yellow), var(--light-green))"
+  );
 
   // 🔍 Search handler
   const searchInput = document.getElementById("searchInput");
-  searchInput.addEventListener("input", e => {
+  searchInput.addEventListener("input", (e) => {
     const results = searchExpenses(e.target.value);
     renderExpensesTable(results);
   });
