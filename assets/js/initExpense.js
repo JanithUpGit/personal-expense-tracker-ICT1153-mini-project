@@ -3,8 +3,14 @@ const expensesDb = {
     {
       id: 1,
       username: "janith",
-      email: "janith@example.com",
-      password: "123456",
+      email: "janith@gmail.com",
+      password: "1234",
+    },
+    {
+      id: 2,
+      username: "temp",
+      email: "temp@gmail.com",
+      password: "1234",
     },
   ],
   categories: [

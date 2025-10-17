@@ -1,0 +1,26 @@
+.summary-boxes {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .summary {
+      flex: 1;
+      min-width: 220px;
+      background: var(--mot-card-bg);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .summary h3 {
+      color: #558b2f;
+      margin-bottom: 10px;
+    }
+
+    .summary p {
+      font-size: 20px;
+      font-weight: bold;
+    }

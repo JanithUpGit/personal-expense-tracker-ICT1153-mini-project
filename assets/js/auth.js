@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signupForm");
   const loginForm = document.getElementById("loginForm");
 
-  function getDB() {
+  function getData() {
     return JSON.parse(localStorage.getItem("expensesDb")) || { users: [] };
   }
 
-  function setDB(db) {
+  function setData(db) {
     localStorage.setItem("expensesDb", JSON.stringify(db));
   }
 
@@ -22,10 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Please fill all fields!");
         return;
       }
+      if (password.length < 4) {
+        alert("Password must be at least 4 characters long!");
+        return;
+      }
 
-      const db = getDB();
+      const db = getData();
 
-      // Ensure db.users exists
       if (!db.users) db.users = [];
 
       if (db.users.find((u) => u.email === email)) {
@@ -41,14 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       db.users.push(newUser);
-      setDB(db);
+      setData(db);
 
       alert("Account created successfully!");
       window.location.href = "login.html";
     });
   }
 
-  // ✅ Handle Login
   if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -56,7 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value.trim();
 
-      const db = getDB();
+      if (!email || !password) {
+        alert("Please fill all fields!");
+        return;
+      }
+
+      const db = getData();
       const users = db.users || [];
 
       const user = users.find(
@@ -66,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (user) {
         alert(`Welcome back, ${user.name}!`);
         localStorage.setItem("loggedInUser", JSON.stringify(user));
-        window.location.href = "dashboard.html";
+        window.location.href = "index.html";
       } else {
         alert("Invalid email or password!");
       }

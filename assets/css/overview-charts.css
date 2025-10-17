@@ -7,7 +7,6 @@
   margin-top: 50px;
 }
 
-
 .chart-box h3 {
   text-align: center;
   color: var(--orange);
@@ -28,12 +27,13 @@
 }
 
 
-/* Each bar with flexible width */
 .bar {
-  flex: 0 0 40px; /* fixed width, does not shrink */
+  flex: 0 0 40px;
   border-radius: 8px 8px 0 0;
   position: relative;
   transition: 0.3s ease;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 
@@ -41,26 +41,23 @@
   transform: scale(1.05);
 }
 
-/* Bar labels rotated slightly to avoid overlap */
 .bar-label {
   position: absolute;
   bottom: -25px;
-  width: 50px; /* enough space for text */
+  width: 50px; 
   text-align: center;
   font-size: 0.7rem;
   color: var(--text-color);
-  transform: rotate(-30deg);
   transform-origin: top center;
 }
 
 
-/* Value on top of bar */
 .bar-value {
   position: absolute;
   top: -20px;
   width: 100%;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.55rem;
   color: var(--orange);
   font-weight: bold;
 }
