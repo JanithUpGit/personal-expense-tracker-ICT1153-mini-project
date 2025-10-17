@@ -1,14 +1,16 @@
 // ----- Database Helper Functions -----
 function getData() {
-  return JSON.parse(localStorage.getItem("expensesDb")) || {
-    categories: [
-      { name: "Food", icon: "🍔" },
-      { name: "Transport", icon: "🚗" },
-      { name: "Shopping", icon: "🛍️" },
-      { name: "Entertainment", icon: "🎮" },
-    ],
-    expenses: []
-  };
+  return (
+    JSON.parse(localStorage.getItem("expensesDb")) || {
+      categories: [
+        { name: "Food", icon: "🍔" },
+        { name: "Transport", icon: "🚗" },
+        { name: "Shopping", icon: "🛍️" },
+        { name: "Entertainment", icon: "🎮" },
+      ],
+      expenses: [],
+    }
+  );
 }
 
 function setData(data) {
@@ -27,9 +29,6 @@ function updateData(index, updatedExpense) {
   setData(db);
 }
 
-
-
-// ----- App Logic -----
 let expensesDb = getData();
 
 function loadCategories() {
@@ -38,31 +37,47 @@ function loadCategories() {
 
   select.innerHTML = `<option value="">Select category</option>`;
 
-  expensesDb.categories.forEach(cat => {
+  expensesDb.categories.forEach((cat) => {
     const option = document.createElement("option");
-    option.value = cat.name.toLowerCase();
-    option.textContent = `${cat.icon} ${cat.name}`;
+    option.value = cat.id;
+    option.textContent = `${cat.icon} ${cat.name}`; // visible text
     select.appendChild(option);
   });
 }
+
 
 function validateForm(formData) {
   const amount = parseFloat(formData.get("amount"));
   const category = formData.get("category");
   const date = formData.get("date");
+  const description = formData.get("description");
+  const name = formData.get("name");
 
+  // Amount validation
   if (!amount || amount <= 0) {
-    alert("Please enter a valid amount.");
+    alert("Please enter a valid amount greater than 0.");
     return false;
   }
+
   if (!category) {
     alert("Please select a category.");
     return false;
   }
+
   if (!date) {
     alert("Please select a date.");
     return false;
   }
+
+  if (description && description.length > 200) {
+    alert("Description cannot exceed 200 characters.");
+    return false;
+  }
+  if (name && name.length > 100) {
+    alert("Name cannot exceed 100 characters.");
+    return false;
+  }
+
   return true;
 }
 
@@ -91,9 +106,9 @@ function handleFormSubmit(event) {
 
   const expense = {
     amount: parseFloat(formData.get("amount")),
-    category: formData.get("category"),
+    category: parseInt(formData.get("category")),
     date: formData.get("date"),
-    description: formData.get("description")
+    description: formData.get("description"),
   };
 
   expensesDb.expenses.push(expense);
@@ -103,14 +118,6 @@ function handleFormSubmit(event) {
   form.reset();
 }
 
-
-
-
-
-
-
-
-// ----- Initialize -----
 document.addEventListener("DOMContentLoaded", () => {
   expensesDb = getData();
   loadCategories();
@@ -118,6 +125,3 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("expense-form");
   if (form) form.addEventListener("submit", handleFormSubmit);
 });
-
-
-

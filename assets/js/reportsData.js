@@ -131,6 +131,45 @@ function renderExpenseTrendLineGraph(canvasId, expenses) {
   ctx.textAlign = "center";
 }
 
+
+function renderCategoryBarGraph(containerId, expenses, categories) {
+  const chart = document.getElementById(containerId);
+  chart.innerHTML = "";
+
+  // Sum expenses by category
+  const catTotals = {};
+  expenses.forEach((e) => {
+    const catName = categories.find((c) => c.id === e.category)?.name || "Other";
+    catTotals[catName] = (catTotals[catName] || 0) + e.amount;
+  });
+
+  const labels = Object.keys(catTotals);
+  const data = Object.values(catTotals);
+  const maxVal = Math.max(...data, 100);
+
+  labels.forEach((label, i) => {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.height = (data[i] / maxVal) * 200 + "px"; // adjust height
+    bar.style.backgroundColor = ["#FF6B6B", "#4D96FF", "#FFD93D", "#6BCB77"][i % 4];
+
+    // Value on top
+    const value = document.createElement("div");
+    value.className = "bar-value";
+    value.textContent = "Rs." + data[i];
+
+    // Label at bottom
+    const lbl = document.createElement("div");
+    lbl.className = "bar-label";
+    lbl.textContent = label;
+
+    bar.appendChild(value);
+    bar.appendChild(lbl);
+    chart.appendChild(bar);
+  });
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const db = getData();
 
@@ -174,4 +213,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMonthlyGraph("monthChart", dayLabels, dayData);
 
   renderExpenseTrendLineGraph("totalGraph", db.expenses);
+  renderCategoryBarGraph("categoryChart", db.expenses, db.categories);
 });

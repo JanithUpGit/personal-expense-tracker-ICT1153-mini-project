@@ -31,15 +31,12 @@ body {
    font-family: "Poppins", sans-serif;
 }
 
-h1, h2, h3 {
-  color: #222;
-}
+
 
 p {
   margin-bottom: 10px;
 }
 
-/* Buttons */
 button {
   background-color: #ff9800;
   color: white;
@@ -54,7 +51,6 @@ button:hover {
   background-color: #e68900;
 }
 
-/* Links */
 a {
   text-decoration: none;
   color: inherit;

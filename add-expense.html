@@ -12,7 +12,6 @@
     <script src="/assets/js/addExpense.js"></script>
   </head>
   <body>
-    <!-- Navigation -->
     <header>
       <nav>
         <ul>
@@ -22,15 +21,14 @@
           <li><a href="categories.html">Categories</a></li>
           <li><a href="reports.html">Reports</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="login.html" class="logout">Logout</a></li>
         </ul>
       </nav>
     </header>
 
-    <!-- Add Expense Form -->
     <main>
+      <h2>Add New Expense</h2>
       <section class="add-expense-section">
-        <h2>Add New Expense</h2>
-
         <form id="expense-form">
           <div class="form-group">
             <label for="amount">Amount (Rs)</label>
@@ -61,7 +59,7 @@
               id="description"
               name="description"
               placeholder="Enter description"
-              rows="3"
+              rows="2"
             ></textarea>
           </div>
 

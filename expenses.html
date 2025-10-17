@@ -3,28 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expense Dashboard | Personal Expense Tracker</title>
+    <title>Expense Meter | Expense Dashboard</title>
     <link rel="stylesheet" href="/assets/css/common.css" />
     <link rel="stylesheet" href="/assets/css/expenses.css" />
     <link rel="stylesheet" href="/assets/css/navbar.css" />
-     <link rel="stylesheet" href="/assets/css/expense-dashboard.css" />
-     <link rel="stylesheet" href="/assets/css/overview-charts.css" />
+    <link rel="stylesheet" href="/assets/css/expense-dashboard.css" />
+    <link rel="stylesheet" href="/assets/css/overview-charts.css" />
   </head>
   <body>
     <header>
       <nav>
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html" >Home</a></li>
           <li><a href="add-expense.html">Add Expense</a></li>
           <li><a href="expenses.html" class="active">Expenses</a></li>
-          <li><a href="categories.html" >Categories</a></li>
+          <li><a href="categories.html">Categories</a></li>
           <li><a href="reports.html">Reports</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="login.html" class="logout" >Logout</a></li>
         </ul>
       </nav>
     </header>
+     <h2>Expense Overview</h2>
     <section class="expense-dashboard">
-      <h2>Expense Overview</h2>
+     
 
       <!-- 📊 Summary -->
       <div class="summary-container">
@@ -58,15 +60,20 @@
       </div>
     </section>
 
-
     <section class="expense-history">
-
       <div class="search-bar">
         <input
           type="text"
           id="searchInput"
-          placeholder="Search by category or description..."
+          placeholder="Search by category or description or date..."
         />
+      </div>
+
+      <div class="table-controls">
+        <label><input type="checkbox" id="sortByDate" /> Sort by Date</label>
+        <label
+          ><input type="checkbox" id="sortByCategory" /> Sort by Category</label
+        >
       </div>
       <div class="table-container">
         <table id="expenseTable">

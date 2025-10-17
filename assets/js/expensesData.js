@@ -29,23 +29,21 @@ function updateData(index, updatedExpense) {
   setData(db);
 }
 
-// ----- Search -----
+
 function searchExpenses(keyword) {
   const db = getData();
   const lower = keyword.toLowerCase();
-  return db.expenses.filter(
-    (exp) =>
-      exp.description.toLowerCase().includes(lower) ||
-      db.categories
-        .find((c) => c.id === exp.category)
-        ?.name.toLowerCase()
-        .includes(lower)
-        
-      
-  );
+  return db.expenses.filter((exp) => {
+    const categoryName = db.categories.find((c) => c.id === exp.category)?.name || "";
+    return (
+      exp.description.toLowerCase().includes(lower) ||   // search by description
+      categoryName.toLowerCase().includes(lower) ||      // search by category
+      exp.date.includes(keyword)                         // search by date
+    );
+  });
 }
 
-// ----- Render Table -----
+
 function renderExpensesTable(expenses) {
   const tbody = document.querySelector("#expenseBody");
   tbody.innerHTML = "";
@@ -115,7 +113,7 @@ function calculateMonthExpenses() {
     .reduce((sum, exp) => sum + Number(exp.amount), 0);
 }
 
-// ----- Graph Data -----
+
 function getTotalExpenseByCategory() {
   const db = getData();
   const totals = {};
@@ -195,6 +193,81 @@ function renderBarChart(containerId, labels, data, colors) {
   });
 }
 
+function sortExpenses(expenses, type) {
+  const db = getData();
+
+  switch (type) {
+    case "date":
+      return expenses.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    case "name":
+      return expenses.sort((a, b) =>
+        a.description.localeCompare(b.description)
+      );
+
+    case "category":
+      return expenses.sort((a, b) => {
+        const catA = db.categories.find(c => c.id === a.category)?.name || "";
+        const catB = db.categories.find(c => c.id === b.category)?.name || "";
+        return catA.localeCompare(catB);
+      });
+
+    default:
+      return expenses;
+  }
+}
+
+function groupExpenses(expenses, type) {
+  if (!type) return { "All Expenses": expenses };
+
+  const db = getData();
+  const grouped = {};
+
+  expenses.forEach(exp => {
+    let key = "Other";
+    if (type === "date") key = exp.date;
+    else if (type === "name") key = exp.description;
+    else if (type === "category")
+      key = db.categories.find(c => c.id === exp.category)?.name || "Unknown";
+
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(exp);
+  });
+
+  return grouped;
+}
+
+function renderGroupedExpenses(expenses, groupBy) {
+  const tbody = document.getElementById("expenseBody");
+  tbody.innerHTML = "";
+
+  const grouped = groupExpenses(expenses, groupBy);
+  const db = getData();
+  let count = 1;
+
+  Object.keys(grouped).forEach(group => {
+    // Group header row
+    const headerRow = document.createElement("tr");
+    headerRow.innerHTML = `<td colspan="5" style="font-weight:bold; background:#f4f4f4;">${group}</td>`;
+    tbody.appendChild(headerRow);
+
+    // Each expense row
+    grouped[group].forEach(exp => {
+      const cat = db.categories.find(c => c.id === exp.category);
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${count++}</td>
+        <td>Rs.${exp.amount}</td>
+        <td>${cat ? cat.icon + " " + cat.name : "Unknown"}</td>
+        <td>${exp.date}</td>
+        <td>${exp.description}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  });
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const db = getData();
   renderExpensesTable(db.expenses);
@@ -227,5 +300,31 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", (e) => {
     const results = searchExpenses(e.target.value);
     renderExpensesTable(results);
+  });
+
+  // 🧮 Sorting and grouping
+  const sortByDate = document.getElementById("sortByDate");
+  const sortByCategory = document.getElementById("sortByCategory");
+
+  function updateTable() {
+    const db = getData();
+    let expenses = db.expenses;
+
+    let type = null;
+    if (sortByDate.checked) type = "date";
+    else if (sortByCategory.checked) type = "category";
+
+    // Sort and group data
+    expenses = sortExpenses(expenses, type);
+    renderGroupedExpenses(expenses, type);
+  }
+
+  [sortByDate,sortByCategory].forEach(box => {
+    box.addEventListener("change", (e) => {
+      [sortByDate,sortByCategory].forEach(b => {
+        if (b !== e.target) b.checked = false;
+      });
+      updateTable();
+    });
   });
 });
