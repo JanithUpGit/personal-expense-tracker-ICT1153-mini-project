@@ -68,9 +68,10 @@ document.getElementById("category-form").addEventListener("submit", e => {
   e.preventDefault();
   const name = document.getElementById("category-name").value.trim();
   const icon = document.getElementById("category-icon").value.trim();
+  const description = document.getElementById("category-description").value.trim();
 
-  if (!name || !icon) {
-    alert("Please fill both fields!");
+  if (!name || !icon || !description) {
+    alert("Please fill all fields!");
     return;
   }
 
@@ -78,7 +79,7 @@ document.getElementById("category-form").addEventListener("submit", e => {
     ? expensesDb.categories[expensesDb.categories.length - 1].id + 1
     : 1;
 
-  expensesDb.categories.push({ id: newId, name, icon });
+  expensesDb.categories.push({ id: newId, name, icon, description });
   setData(expensesDb);
   e.target.reset();
   renderCategories();
